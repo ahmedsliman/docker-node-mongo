@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    container_name: docker-node-mongo
+    # once it fails it make restart
+    restart: always
+    # build from the Dockerfile exists in the current container
+    build: .
+    ports:
+      - '83:3000'
+    # link to our db service container below
+    links:
+      - db
+  db:
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
